@@ -3,11 +3,21 @@
   "bucket": "",
   "preset": "javascript",
   "env": "production",
-  "prefix": "",
-  "not-first-run": false,
-  "function": [],
+  "prefix": "20251020102251",
+  "not-first-run": true,
+  "function": [
+    {
+      "id": 50615,
+      "name": "upload-example",
+      "file": "",
+      "args": "./azion/args.json",
+      "instance-id": 45239,
+      "instance-name": "",
+      "cache-id": 0
+    }
+  ],
   "application": {
-    "id": 0,
+    "id": 1760960559,
     "name": "__DEFAULT__"
   },
   "domain": {
@@ -22,15 +32,26 @@
   "origin": null,
   "rules-engine": {
     "created": false,
-    "rules": null
+    "rules": [
+      {
+        "id": 483667,
+        "name": "Execute Function",
+        "phase": "request"
+      }
+    ]
   },
-  "cache-settings": null,
+  "cache-settings": [],
   "workloads": {
-    "id": 0,
-    "name": "",
-    "domains": null,
-    "url": "",
-    "deployment_id": null
+    "id": 1760969031,
+    "name": "upload-example",
+    "domains": [],
+    "url": "https://went1tyml3s.map.azionedge.net",
+    "deployment_id": [
+      {
+        "id": 167095,
+        "name": "upload-example"
+      }
+    ]
   },
-  "connectors": null
+  "connectors": []
 }

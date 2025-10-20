@@ -20,17 +20,18 @@
 export default {
   build: {
     preset: 'javascript',
-    polyfills: true
+    polyfills: true,
+    entry: './src/index.ts'
   },
   functions: [
     {
-      name: '$FUNCTION_NAME',
+      name: 'upload-example',
       path: './functions/index.js'
     }
   ],
   applications: [
     {
-      name: '$APPLICATION_NAME',
+      name: 'upload-example',
       rules: {
         request: [
           {
@@ -51,7 +52,7 @@ export default {
               {
                 type: 'run_function',
                 attributes: {
-                  value: '$FUNCTION_NAME'
+                  value: 'upload-example'
                 }
               }
             ]
@@ -60,15 +61,15 @@ export default {
       },
       functionsInstances: [
         {
-          name: '$FUNCTION_INSTANCE_NAME',
-          ref: '$FUNCTION_NAME'
+          name: 'upload-example',
+          ref: 'upload-example'
         }
       ]
     }
   ],
   workloads: [
     {
-      name: '$WORKLOAD_NAME',
+      name: 'upload-example',
       active: true,
       infrastructure: 1,
       protocols: {
@@ -81,13 +82,13 @@ export default {
       },
       deployments: [
         {
-          name: '$DEPLOYMENT_NAME',
+          name: 'upload-example',
           current: true,
           active: true,
           strategy: {
             type: 'default',
             attributes: {
-              application: '$APPLICATION_NAME'
+              application: 'upload-example'
             }
           }
         }
