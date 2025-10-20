@@ -9,7 +9,7 @@ The application provides a `/upload` endpoint that accepts file uploads and retu
 ## Features
 
 - 🚀 Simple file upload endpoint
-- 🛡️ AI-powered security at the edge using Azion Firewall
+- 🛡️ AI-powered security at the edge using [Azion AI Inference](https://www.azion.com/en/products/ai-inference/)
 - 📊 Returns file metadata (filename, extension, MIME type)
 - ✅ Comprehensive unit tests with Vitest
 - 🌐 Deployed on [Azion web platform](https://www.azion.com/)
@@ -100,18 +100,18 @@ async function handleRequest(event) {
     const { model, action, prompt } = event.args;
     const contentType = event.request.headers.get("content-type");
 
-    // Permite imagens
+    // Allow images
     if (contentType && contentType.startsWith("image/")) {
       event.continue();
       return;
     }
 
-    // Decodifica o conteúdo se for base64
+    // Decodes the content if it is base64
     const decodedBody = contentType && contentType.includes("base64")
       ? atob(requestBody.split(",")[1])
       : requestBody;
 
-    // Chama o modelo via Azion.AI.run
+    // Calls the model via Azion.AI.run
     const modelResponse = await Azion.AI.run(model, {
       stream: false,
       seed: 42,
@@ -129,12 +129,12 @@ async function handleRequest(event) {
       ]
     });
 
-    // Extrai a resposta do modelo
+    // Extracts the model response
     const result = modelResponse?.choices?.[0]?.message?.content?.trim();
 
     if (result === "true") {
       event.console.warn(`[AI] ${result}`);
-      event[action](); // Executa a ação (ex: deny)
+      event[action](); // Executes the action (ex: deny)
       return;
     }
   } catch (err) {
@@ -143,10 +143,10 @@ async function handleRequest(event) {
     return;
   }
 
-  event.continue(); // Se não for malicioso, deixa passar
+  event.continue(); // If not malicious, let it pass
 }
 
-// Mantém o event listener
+// Maintains the event listener
 addEventListener("firewall", event => {
   event.waitUntil(handleRequest(event));
 });
